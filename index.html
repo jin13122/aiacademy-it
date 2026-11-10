@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>청년취업아카데미 AI+ Academy | AX전략 기획 및 멀티 에이전트 서비스 개발</title>
+  <meta name="description" content="청년취업아카데미 AI+ Academy [KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발 공식 안내 홈페이지" />
+  <meta property="og:title" content="청년취업아카데미 AI+ Academy | AX전략 기획 및 멀티 에이전트 서비스 개발" />
+  <meta property="og:description" content="KT그룹의 AX 전략을 직접 설계해보는 경험! AI Agent·Multi-Agent 설계부터 AI 기획서 작성, AI Native 웹서비스 개발까지 350시간 실전 커리큘럼" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Pretendard 웹폰트 -->
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+  <style>
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #ff2e4c;
+      --primary-hover: #ff4d67;
+      --primary-soft: rgba(255, 46, 76, 0.14);
+      --primary-border: rgba(255, 46, 76, 0.38);
+      --sesac-green: #10b981;
+      --sesac-green-soft: rgba(16, 185, 129, 0.14);
+      --aiplus-blue: #38bdf8;
+      --aiplus-blue-soft: rgba(56, 189, 248, 0.14);
+      --accent-amber: #fb923c;
+      --bg-dark: #0a0c10;
+      --bg-section-alt: #0e1117;
+      --bg-card: #141821;
+      --bg-card-hover: #1b202c;
+      --border-color: #222938;
+      --border-light: #323c52;
+      --text-main: #f8fafc;
+      --text-sub: #cbd5e1;
+      --text-muted: #94a3b8;
+      --font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-family);
+      color: var(--text-main);
+      background-color: var(--bg-dark);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      padding-top: 68px;
+      padding-bottom: 92px;
+      overflow-x: hidden;
+      font-variant-numeric: tabular-nums;
+    }
+
+    section {
+      scroll-margin-top: 76px;
+      padding: 76px 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 스크롤 올리고 내릴 때마다 나타나고 사라지는 애니메이션 */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(36px) scale(0.98);
+      transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .nowrap-line {
+      white-space: nowrap;
+      display: inline-block;
+    }
+
+    @media (max-width: 767px) {
+      .nowrap-line {
+        font-size: clamp(13px, 3.6vw, 16px);
+      }
+    }
+
+    /* 상단 고정 네비게이션 헤더 (스크롤 업/다운 시 항상 고정) */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(10, 12, 16, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .nav-wrapper {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 16px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .brand-sesac {
+      color: var(--sesac-green);
+      font-weight: 900;
+    }
+
+    .brand-aiplus {
+      color: var(--aiplus-blue);
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      align-items: center;
+      gap: 18px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 0;
+    }
+
+    .nav-links::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color 0.18s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-cta-btn {
+      background: linear-gradient(135deg, var(--primary), #d91636);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(255, 46, 76, 0.3);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .nav-cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255, 46, 76, 0.45);
+    }
+
+    /* Top Notice Bar */
+    .top-bar {
+      background: #11151f;
+      border-bottom: 1px solid var(--border-color);
+      color: #e2e8f0;
+      padding: 9px 20px;
+      font-size: 13px;
+      text-align: center;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .top-badge {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 800;
+      padding: 2px 9px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      padding: 76px 0 64px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 15%, rgba(255, 46, 76, 0.15) 0%, rgba(56, 189, 248, 0.06) 42%, rgba(10, 12, 16, 0) 75%);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .hero-kicker-line {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--text-sub);
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .hero-kicker-sep {
+      color: var(--border-light);
+    }
+
+    .hero-kicker-highlight {
+      color: #ff3b56;
+      font-weight: 900;
+      font-size: 15.5px;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-thickness: 2px;
+      text-shadow: 0 0 18px rgba(255, 46, 76, 0.45);
+    }
+
+    .hero-sub-lead {
+      font-size: 20px;
+      color: #f8fafc;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-sub-lead {
+        font-size: 24px;
+      }
+    }
+
+    .hero-title {
+      font-size: 34px;
+      line-height: 1.24;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .hero-title {
+        font-size: 52px;
+      }
+    }
+
+    .hero-title .accent {
+      background: linear-gradient(135deg, #ff2e4c 0%, #fb7185 50%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      max-width: 1080px;
+      margin: 0 auto 32px;
+      font-size: 16.5px;
+      color: var(--text-sub);
+      line-height: 1.7;
+    }
+
+    .hero-desc strong {
+      color: #ffffff;
+    }
+
+    /* Hero Progression Bar */
+    .hero-growth-flow {
+      max-width: 920px;
+      margin: 0 auto 36px;
+      background: rgba(20, 24, 33, 0.85);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 12px;
+      text-align: left;
+    }
+
+    @media (min-width: 640px) {
+      .hero-growth-flow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .hero-growth-flow {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+    }
+
+    .growth-step-node {
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .growth-step-node.active-peak {
+      background: var(--primary-soft);
+      border-color: var(--primary-border);
+    }
+
+    .growth-step-num {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .growth-step-node.active-peak .growth-step-num {
+      color: var(--accent-amber);
+    }
+
+    .growth-step-label {
+      font-size: 15.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .growth-step-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    /* Hero 3 Key Summary Cards */
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 920px;
+      margin: 0 auto 38px;
+      text-align: left;
+    }
+
+    @media (min-width: 640px) {
+      .highlights-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .highlights-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+    }
+
+    .highlight-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 20px 18px;
+      border-radius: 16px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .highlight-card:hover {
+      border-color: var(--primary-border);
+      background: var(--bg-card-hover);
+    }
+
+    .highlight-kicker {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .highlight-val {
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 4px;
+      line-height: 1.35;
+    }
+
+    .highlight-lbl {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    @media (min-width: 640px) {
+      .hero-actions {
+        flex-direction: row;
+      }
+    }
+
+    .btn-primary-lg {
+      width: 100%;
+      max-width: 340px;
+      background: linear-gradient(135deg, var(--primary), #d91636);
+      color: #ffffff;
+      font-size: 16.5px;
+      font-weight: 800;
+      padding: 16px 32px;
+      border-radius: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(255, 46, 76, 0.32);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .btn-primary-lg {
+        width: auto;
+      }
+    }
+
+    .btn-primary-lg:hover {
+      background: linear-gradient(135deg, var(--primary-hover), #e11d48);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 46, 76, 0.45);
+    }
+
+    .btn-secondary-lg {
+      width: 100%;
+      max-width: 340px;
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      font-size: 15.5px;
+      font-weight: 700;
+      padding: 16px 26px;
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+
+    @media (min-width: 640px) {
+      .btn-secondary-lg {
+        width: auto;
+      }
+    }
+
+    .btn-secondary-lg:hover {
+      background: rgba(255, 255, 255, 0.11);
+    }
+
+    /* Section Header Global */
+    .section-header {
+      text-align: center;
+      max-width: 1040px;
+      margin: 0 auto 48px;
+    }
+
+    .section-kicker {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: 0.02em;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.32;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .section-title {
+        font-size: 36px;
+      }
+    }
+
+    .section-title .text-accent {
+      color: var(--primary);
+    }
+
+    .section-title .text-blue {
+      color: var(--aiplus-blue);
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+
+    /* Course Overview Grid */
+    .overview-grid {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    @media (min-width: 768px) {
+      .overview-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 38px;
+        gap: 24px 32px;
+      }
+    }
+
+    .overview-item {
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .overview-item.full-span {
+      grid-column: 1 / -1;
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .overview-label {
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .overview-value {
+      font-size: 15.5px;
+      color: #f1f5f9;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    .overview-value strong {
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .overview-sublist {
+      margin-top: 10px;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.025);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 14px;
+      color: var(--text-sub);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* 3 Stat / Pillar Cards */
+    .stats-3grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    @media (min-width: 768px) {
+      .stats-3grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--aiplus-blue);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .stat-source {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* 4 Grid Cards (AI+ Features & Hiring) */
+    .hiring-4grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    @media (min-width: 640px) {
+      .hiring-4grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+    }
+
+    .hiring-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .hiring-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-light);
+    }
+
+    .hiring-brand-bar {
+      padding: 14px 22px;
+      font-weight: 900;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-kt-red { background: linear-gradient(90deg, #ff2e4c, #be123c); color: #ffffff; }
+    .brand-ai-blue { background: linear-gradient(90deg, #0284c7, #0369a1); color: #ffffff; }
+    .brand-sesac-emerald { background: linear-gradient(90deg, #059669, #047857); color: #ffffff; }
+    .brand-indigo { background: linear-gradient(90deg, #4f46e5, #3730a3); color: #ffffff; }
+
+    .hiring-body {
+      padding: 24px 22px;
+    }
+
+    .hiring-role {
+      font-size: 13px;
+      color: var(--aiplus-blue);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .hiring-req {
+      font-size: 18px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+
+    .hiring-desc {
+      font-size: 14px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* Comparison Table */
+    .comp-table-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .comp-table th {
+      padding: 18px 20px;
+      text-align: left;
+      font-weight: 800;
+      font-size: 15px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .comp-table th.th-cat {
+      width: 120px;
+      background: #10141d;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .comp-table th.th-general {
+      background: #141923;
+      color: var(--text-muted);
+      width: 40%;
+    }
+
+    .comp-table th.th-growth {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    .comp-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      line-height: 1.5;
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comp-cat-cell {
+      font-weight: 800;
+      color: var(--text-sub);
+      text-align: center;
+      background: rgba(255, 255, 255, 0.015);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .comp-general-cell {
+      color: var(--text-muted);
+    }
+
+    .comp-growth-cell {
+      color: #ffffff;
+      font-weight: 800;
+      background: rgba(255, 46, 76, 0.06);
+    }
+
+    /* Definition Box */
+    .definition-box {
+      background: linear-gradient(135deg, #1f1016 0%, #141821 100%);
+      border: 1px solid var(--primary-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 36px;
+    }
+
+    .definition-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--accent-amber);
+      margin-bottom: 12px;
+    }
+
+    .definition-lead {
+      font-size: 20px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .definition-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .definition-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .def-step-item {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px 18px;
+      border-radius: 12px;
+      font-size: 14.5px;
+      color: #f1f5f9;
+      font-weight: 600;
+      line-height: 1.55;
+    }
+
+    .def-step-item strong {
+      color: var(--accent-amber);
+    }
+
+    /* 3 Points Stack */
+    .points-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .point-row-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    @media (min-width: 768px) {
+      .point-row-card {
+        grid-template-columns: 260px 1fr;
+      }
+    }
+
+    .point-left {
+      background: linear-gradient(135deg, var(--primary), #be123c);
+      color: #ffffff;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .point-num {
+      font-size: 12px;
+      font-weight: 800;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .point-name {
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    .point-right {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .point-tools {
+      font-size: 13.5px;
+      color: var(--aiplus-blue);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .point-desc {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.45;
+    }
+
+    /* Offline & Feature 4-Grid */
+    .offline-4grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    @media (min-width: 768px) {
+      .offline-4grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
+
+    /* Curriculum Interactive Tabs */
+    .curriculum-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      scrollbar-width: none;
+    }
+
+    .curriculum-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .curr-tab-btn {
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      white-space: nowrap;
+      transition: all 0.18s;
+      flex-shrink: 0;
+    }
+
+    .curr-tab-btn:hover {
+      color: #ffffff;
+      border-color: var(--border-light);
+    }
+
+    .curr-tab-btn.active {
+      color: #ffffff;
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .curriculum-content-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 32px;
+      margin-bottom: 36px;
+    }
+
+    .step-meta-line {
+      font-size: 13.5px;
+      color: var(--primary);
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .step-title {
+      font-size: 23px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      color: var(--text-sub);
+      font-size: 15.5px;
+      margin-bottom: 22px;
+    }
+
+    .topics-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 20px;
+    }
+
+    .topic-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 15px;
+      color: #e2e8f0;
+    }
+
+    .topic-item::before {
+      content: "✔";
+      color: var(--primary);
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .keyword-line {
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .keyword-line strong {
+      color: var(--accent-amber);
+    }
+
+    /* Syllabus Table */
+    .syllabus-table-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 28px;
+    }
+
+    .syllabus-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14.5px;
+    }
+
+    .syllabus-table th {
+      background: #10141d;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 14px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-light);
+      white-space: nowrap;
+    }
+
+    .syllabus-table td {
+      padding: 16px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-sub);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .syllabus-cat-td {
+      font-weight: 800;
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .syllabus-subj-td {
+      color: #ffffff;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .syllabus-hour-td {
+      text-align: right;
+      font-weight: 900;
+      color: var(--accent-amber);
+      white-space: nowrap;
+      font-size: 15.5px;
+    }
+
+    /* Projects & Architecture Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-card.final-span {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #1d1118 0%, #141821 100%);
+      border-color: var(--primary-border);
+    }
+
+    .project-kicker {
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-size: 21px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    /* CSS Data Visualizations inside Project Cards */
+    .proj-viz-box {
+      background: rgba(10, 12, 16, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .kpi-3row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      text-align: center;
+    }
+
+    .kpi-mini {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 10px 8px;
+      border-radius: 10px;
+    }
+
+    .kpi-mini-label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .kpi-mini-val {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--aiplus-blue);
+      margin-top: 4px;
+    }
+
+    .sql-code-box {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 12.5px;
+      color: #e2e8f0;
+      line-height: 1.55;
+      background: #090b10;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .sql-kw {
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .sql-fn {
+      color: var(--aiplus-blue);
+      font-weight: 700;
+    }
+
+    .n8n-flow-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    @media (min-width: 640px) {
+      .n8n-flow-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .n8n-node {
+      border: 1px solid var(--primary);
+      background: rgba(255, 46, 76, 0.08);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 800;
+      padding: 10px 6px;
+      border-radius: 10px;
+    }
+
+    .proj-meta-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 14.5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 16px;
+    }
+
+    .proj-meta-label {
+      color: var(--accent-amber);
+      font-weight: 800;
+      margin-right: 8px;
+    }
+
+    /* Benefits 4+4 Grid */
+    .benefits-6grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    @media (min-width: 640px) {
+      .benefits-6grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 992px) {
+      .benefits-6grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .benefit-item-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .benefit-item-card.featured {
+      background: linear-gradient(135deg, rgba(255, 46, 76, 0.14) 0%, rgba(20, 24, 33, 1) 100%);
+      border-color: var(--primary-border);
+    }
+
+    .benefit-num {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .benefit-item-title {
+      font-size: 17.5px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .benefit-item-desc {
+      font-size: 13.5px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+
+    /* Qualification Cards */
+    .qual-3grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    @media (min-width: 992px) {
+      .qual-3grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .qual-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .qual-card.must-have {
+      border-color: var(--primary-border);
+      background: linear-gradient(180deg, rgba(255, 46, 76, 0.08) 0%, rgba(20, 24, 33, 1) 100%);
+    }
+
+    .qual-tag {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .qual-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .qual-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14.5px;
+      color: var(--text-sub);
+    }
+
+    .qual-list li {
+      position: relative;
+      padding-left: 16px;
+      line-height: 1.55;
+    }
+
+    .qual-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 900;
+    }
+
+    .qual-list li strong {
+      color: #ffffff;
+    }
+
+    /* FAQ Accordion */
+    .faq-container {
+      max-width: 860px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 20px 24px;
+      text-align: left;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq-q-prefix {
+      color: var(--primary);
+      font-weight: 900;
+      margin-right: 8px;
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      color: var(--primary);
+      transition: transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 16px 24px 22px;
+      font-size: 14.5px;
+      color: var(--text-sub);
+      line-height: 1.7;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    /* Campus Location Card */
+    .campus-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      background: #06080c;
+      color: var(--text-muted);
+      font-size: 13px;
+      padding: 40px 0;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    /* Sticky Bottom Apply Bar */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 990;
+      background: rgba(10, 12, 16, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-top: 1px solid var(--border-color);
+      padding: 12px 20px;
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .sticky-content {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .sticky-info {
+      display: none;
+    }
+
+    @media (min-width: 640px) {
+      .sticky-info {
+        display: block;
+      }
+    }
+
+    .sticky-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .sticky-btn-apply {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), #d91636);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14.5px;
+      padding: 12px 26px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(255, 46, 76, 0.35);
+    }
+
+    @media (min-width: 640px) {
+      .sticky-btn-apply {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 상단 고정 네비게이션 헤더 (스크롤 올리고 내려도 항상 상단 고정) -->
+  <header>
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo">
+        <span class="brand-sesac">청년취업아카데미</span>
+        <span class="brand-aiplus">AI+ Academy</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#overview">과정개요</a></li>
+        <li><a href="#ai-plus">AI+ 아카데미</a></li>
+        <li><a href="#method">핵심차별점</a></li>
+        <li><a href="#curriculum">커리큘럼(350h)</a></li>
+        <li><a href="#projects">실무프로젝트</a></li>
+        <li><a href="#benefits">교육·취업혜택</a></li>
+        <li><a href="#qualification">지원자격</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#location">오시는길</a></li>
+      </ul>
+
+      <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+        <span>상담신청</span>
+        <span>→</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 상단 공지 배너 -->
+  <div class="top-bar">
+    <span class="top-badge">모집 안내</span>
+    <span>청년취업아카데미 AI+ Academy | 교육비 전액 무료 · 25명 선발</span>
+  </div>
+
+  <!-- 히어로 섹션 (메인 배너) -->
+  <section class="hero">
+    <div class="container reveal-on-scroll">
+      <div class="hero-kicker-line">
+        <span class="hero-kicker-highlight">KT그룹 및 협력사 채용 연계</span>
+        <span class="hero-kicker-sep">·</span>
+        <span>교육비 전액 무료 (예치금 100% 반환)</span>
+        <span class="hero-kicker-sep">·</span>
+        <span>청년취업사관학교 동작캠퍼스 x AI+ 아카데미</span>
+      </div>
+
+      <p class="hero-sub-lead">KT그룹의 AX 전략을 직접 설계해보는 경험!</p>
+      <h1 class="hero-title">
+        <span class="accent">[KT그룹] AX전략 기획 및</span><br />
+        멀티 에이전트 서비스 개발
+      </h1>
+
+      <p class="hero-desc">
+        AI Agent · Multi-Agent 설계부터 AI 기획서 작성, AI Native 웹서비스 개발까지<br />
+        <span class="nowrap-line"><strong>이론과 실습을 넘나드는 AX 실전 커리큘럼(350시간)</strong>과 종합 프로젝트·맞춤형 취업 컨설팅으로 AX 전문가로 도약하세요.</span>
+      </p>
+
+      <!-- AX 전문가 성장 단계 흐름도 (텍스트 다이어그램) -->
+      <div class="hero-growth-flow reveal-on-scroll">
+        <div class="growth-step-node">
+          <span class="growth-step-num">STEP 01 · 70시간</span>
+          <span class="growth-step-label">Agentic AI 설계</span>
+          <span class="growth-step-sub">Prompt·LLMOps · LangChain · RAG · LangGraph · MCP</span>
+        </div>
+        <div class="growth-step-node">
+          <span class="growth-step-num">STEP 02 · 35시간</span>
+          <span class="growth-step-label">AI Native 웹서비스</span>
+          <span class="growth-step-sub">AI 활용 웹서비스 · CRUD 게시판 · API 연동 개발</span>
+        </div>
+        <div class="growth-step-node">
+          <span class="growth-step-num">STEP 03 · 14시간 + 특강 14시간</span>
+          <span class="growth-step-label">AX 전략 기획·관리</span>
+          <span class="growth-step-sub">산업별 AI 전환 ROI 분석 · Risk 관리 · 파이프라인 기획</span>
+        </div>
+        <div class="growth-step-node active-peak">
+          <span class="growth-step-num">STEP 04 · 217시간 (핵심)</span>
+          <span class="growth-step-label">기업 실무 연계 프로젝트</span>
+          <span class="growth-step-sub">KT 현업 멘토링 · 직무 자동화 Multi-Agent 서비스 배포</span>
+        </div>
+      </div>
+
+      <!-- 핵심 교육 정보 요약 카드 3종 -->
+      <div class="highlights-grid reveal-on-scroll">
+        <div class="highlight-card">
+          <div class="highlight-kicker">교육 기간 · 시간</div>
+          <div class="highlight-val" style="font-size: 16.5px;">2026. 12. 14 ~ 2027. 02. 25</div>
+          <div class="highlight-lbl">총 350시간 (이론/실습 119h · 특강 14h · 프로젝트 217h)</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-kicker">교육 장소 · 오프라인</div>
+          <div class="highlight-val">청년취업사관학교 동작캠퍼스</div>
+          <div class="highlight-lbl">서울 동작구 노량진로 10 스페이스살림 2층 (대방역 앞)</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-kicker">선발 인원 · 취업 혜택</div>
+          <div class="highlight-val">25명 소수정예</div>
+          <div class="highlight-lbl">우수 수료생 KT그룹 및 협력사 연계 채용 기회 제공</div>
+        </div>
+      </div>
+
+      <!-- 메인 액션 버튼 -->
+      <div class="hero-actions reveal-on-scroll">
+        <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="btn-primary-lg">
+          <span>지금 과정 상담신청하기</span>
+          <span>→</span>
+        </a>
+        <a href="#curriculum" class="btn-secondary-lg">
+          <span>350시간 세부 커리큘럼 확인하기</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 과정 개요 섹션 -->
+  <section id="overview" style="padding-top: 64px;">
+    <div class="container">
+      <div class="section-header reveal-on-scroll" style="margin-bottom: 32px;">
+        <span class="section-kicker">COURSE OVERVIEW · 모집 요강</span>
+        <h2 class="section-title">과정 개요 및 핵심 안내</h2>
+        <p class="section-desc">청년취업사관학교(SeSAC)와 KT그룹 AI+ 아카데미가 함께 운영하는 실전 AX 전략 기획 및 멀티 에이전트 개발 과정입니다.</p>
+      </div>
+
+      <div class="overview-grid reveal-on-scroll">
+        <div class="overview-item">
+          <div class="overview-label">기업명</div>
+          <div class="overview-value"><strong>KT그룹</strong> (청년취업아카데미 x KT그룹 AI+ 아카데미)</div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">과정명</div>
+          <div class="overview-value"><strong>[KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발</strong></div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">교육목표 · 분야</div>
+          <div class="overview-value"><strong>AX 전략 수립 역량 강화</strong> · 교육분야: <strong>AI, AX</strong></div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">교육기간 · 시수</div>
+          <div class="overview-value">
+            <strong style="color: var(--accent-amber);">2026. 12. 14 ~ 2027. 02. 25</strong> (총 <strong>350시간</strong>)
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">교육장소</div>
+          <div class="overview-value">
+            <strong>청년취업사관학교 동작캠퍼스</strong><br />
+            <span style="font-size: 13.5px; color: var(--text-muted);">서울 동작구 노량진로 10 스페이스살림 2층 (1호선·신림선 대방역 인근)</span>
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">교육인원</div>
+          <div class="overview-value">
+            <strong>25명</strong><br />
+            <span style="font-size: 13.5px; color: var(--aiplus-blue);">※ 기업 선발 기준에 따라 선발하며, 기준 충족 인원에 따라 운영</span>
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">교육비 · 예치금 안내</div>
+          <div class="overview-value">
+            <strong>전액 무료 (실제 교육비 0원)</strong><br />
+            <span style="font-size: 13.5px; color: var(--text-muted);">합격자 대상 10만원 예치금 수령 후, 수료요건 충족 시 100% 반환</span>
+          </div>
+        </div>
+        <div class="overview-item">
+          <div class="overview-label">수료기준</div>
+          <div class="overview-value">
+            <strong>1. 출석률 80% 이상</strong><br />
+            <strong>2. 수강 30% 이수 후 취·창업 성공</strong>
+          </div>
+        </div>
+        <div class="overview-item full-span">
+          <div class="overview-label">주요 습득 기술</div>
+          <div class="overview-value">
+            <strong>LLMOps & Agent / Agentic 워크플로우 & Multi-Agent / AI 활용 기획 및 자동화 / GenAI 및 AI 개발 / AI Native 웹서비스 개발</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI+ Academy 소개 및 교육 프로그램 특징 섹션 -->
+  <section id="ai-plus" style="background-color: var(--bg-section-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <!-- 1. AI+ Academy란? -->
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">AI+ ACADEMY · AI 중심 미래혁신 인재양성 플랫폼</span>
+        <h2 class="section-title">
+          대한상공회의소 x 서울시 x 글로벌 선도기업이 함께하는<br />
+          <span class="text-blue">AI 특화 교육 프로그램, AI+ Academy</span>
+        </h2>
+        <p class="section-desc">
+          대한상공회의소가 글로벌 빅테크 및 국내 AI 선도기업(KT그룹), 서울시 등과 협력·운영하는 AI 특화 교육 프로그램입니다.<br />
+          AI 선도기업 기술 기반 교육 및 기업연계 프로젝트 수행 등을 통해 현장 실무 역량을 갖춘 AI 인재 양성을 목표로 합니다.
+        </p>
+      </div>
+
+      <!-- AI+ 인재성장 시스템 3대 축 -->
+      <div class="stats-3grid">
+        <div class="stat-card reveal-on-scroll">
+          <div class="stat-num">SYSTEM 01</div>
+          <div>
+            <h3 class="stat-title">AI 기반 협업체계</h3>
+            <p class="stat-source">
+              AI 융합 교육과정을 기반으로 <strong style="color: var(--aiplus-blue);">최신 기술 트렌드와 산업 수요를 반영한</strong> 맞춤형 실무 중심 교육을 운영합니다.
+            </p>
+          </div>
+        </div>
+        <div class="stat-card reveal-on-scroll">
+          <div class="stat-num" style="color: var(--sesac-green);">SYSTEM 02</div>
+          <div>
+            <h3 class="stat-title">지속성장 생태계 조성</h3>
+            <p class="stat-source">
+              수료 후에도 <strong style="color: var(--sesac-green);">커뮤니티와 동문회 활동</strong> 등을 통해 지속적인 성장을 지원합니다.
+            </p>
+          </div>
+        </div>
+        <div class="stat-card reveal-on-scroll">
+          <div class="stat-num" style="color: var(--accent-amber);">SYSTEM 03</div>
+          <div>
+            <h3 class="stat-title">기업 연계 인재 매칭 강화</h3>
+            <p class="stat-source">
+              AI 선도기업과의 협력을 통해 실무 중심 프로젝트 및 <strong style="color: var(--accent-amber);">기업·파트너사 취업지원 프로그램을 연계</strong>합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. AI+ 교육 프로그램 특징 4가지 -->
+      <div class="section-header reveal-on-scroll" style="margin-top: 20px; margin-bottom: 36px;">
+        <span class="section-kicker">PROGRAM FEATURES · 핵심 특징 확인하기</span>
+        <h2 class="section-title">
+          <span class="text-accent">AI+ 교육 프로그램</span>만의<br />
+          4가지 차별화된 특징
+        </h2>
+      </div>
+
+      <div class="hiring-4grid" style="margin-bottom: 0;">
+        <div class="hiring-card reveal-on-scroll">
+          <div class="hiring-brand-bar brand-kt-red">
+            <span>FEATURE 01</span>
+            <span style="font-size: 12px; font-weight: 800;">KT그룹 직접 협업</span>
+          </div>
+          <div class="hiring-body">
+            <div class="hiring-role">기업 맞춤형 커리큘럼</div>
+            <div class="hiring-req">우수 AI 선도기업 협업</div>
+            <p class="hiring-desc">
+              글로벌 빅테크·선도기업(KT그룹)과 함께 과정설계부터 운영까지 교육 전반에 참여하여 기업형 인재를 양성합니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="hiring-card reveal-on-scroll">
+          <div class="hiring-brand-bar brand-ai-blue">
+            <span>FEATURE 02</span>
+            <span style="font-size: 12px; font-weight: 800;">인턴십 · 채용 연계</span>
+          </div>
+          <div class="hiring-body">
+            <div class="hiring-role">수료생 전용 베네핏</div>
+            <div class="hiring-req">AI+ 수료생만을 위한 취업지원 혜택</div>
+            <p class="hiring-desc">
+              참여기업 인턴십·협력사 및 파트너사 취업 연계, 기업 공동 수료증 발급 등 특별 취업지원 혜택을 제공합니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="hiring-card reveal-on-scroll">
+          <div class="hiring-brand-bar brand-sesac-emerald">
+            <span>FEATURE 03</span>
+            <span style="font-size: 12px; font-weight: 800;">취·창업 집중 케어</span>
+          </div>
+          <div class="hiring-body">
+            <div class="hiring-role">실전 커리어 고도화</div>
+            <div class="hiring-req">체계적인 취업지원 프로그램</div>
+            <p class="hiring-desc">
+              이력서·포트폴리오 고도화, 실전 면접 대비 취업컨설팅, 창업자 대상 사업화 전략 등 취업 역량 강화를 위한 집중 프로그램을 운영합니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="hiring-card reveal-on-scroll">
+          <div class="hiring-brand-bar brand-indigo">
+            <span>FEATURE 04</span>
+            <span style="font-size: 12px; font-weight: 800;">학습 인프라 지원</span>
+          </div>
+          <div class="hiring-body">
+            <div class="hiring-role">현업 리소스 & 전담 코디</div>
+            <div class="hiring-req">AI+ 교육생을 위한 특별혜택</div>
+            <p class="hiring-desc">
+              기업 내부 데이터셋 지원 및 실무 콘텐츠 지원, 캠퍼스별 전담 잡코디 배치 등 원활한 교육이수를 위한 교육혜택을 제공합니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 교육 방식 & 핵심 역량 비교 섹션 -->
+  <section id="method">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">WHY KT GROUP AX · 핵심 역량 차별화</span>
+        <h2 class="section-title">
+          단순 AI 프롬프트 교육을 넘어,<br />
+          <span class="text-accent">AX 전략 수립부터 멀티 에이전트 배포까지</span> 완성합니다
+        </h2>
+        <p class="section-desc">
+          기업 현장에서 즉시 작동하는 Agentic 워크플로우 설계와 산업별 ROI 기반 AX 기획력을 동시에 갖춘 올라운더로 성장합니다.
+        </p>
+      </div>
+
+      <!-- 일반 AI 교육 vs KT그룹 AX 과정 비교표 -->
+      <div class="comp-table-wrap reveal-on-scroll" style="margin-bottom: 36px;">
+        <div style="overflow-x: auto;">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th class="th-cat">구분</th>
+                <th class="th-general">일반 생성형 AI 단기 교육</th>
+                <th class="th-growth">[KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="comp-cat-cell">교육 목표</td>
+                <td class="comp-general-cell">단순 챗봇 호출 및 프롬프트 작성법 습득</td>
+                <td class="comp-growth-cell">산업별 AX 전략 수립 + Multi-Agent 오케스트레이션 서비스 구현</td>
+              </tr>
+              <tr>
+                <td class="comp-cat-cell">에이전트 기술</td>
+                <td class="comp-general-cell">단일 LLM API 호출 및 기초 RAG 실습</td>
+                <td class="comp-growth-cell">LangChain · LangGraph · LangSmith · MCP 기반 복합 에이전트 설계</td>
+              </tr>
+              <tr>
+                <td class="comp-cat-cell">기획 · 비즈니스</td>
+                <td class="comp-general-cell">기술 기능 위주의 토이 프로젝트 기획</td>
+                <td class="comp-growth-cell">금융/물류 등 산업 페인포인트 진단, AI 전환 ROI 분석 및 사업 심의 Risk 관리</td>
+              </tr>
+              <tr>
+                <td class="comp-cat-cell">웹서비스 구현</td>
+                <td class="comp-general-cell">노트북(Colab) 환경 내 코드 실행에서 종료</td>
+                <td class="comp-growth-cell">AI Native 웹서비스 개발 (CRUD·게시판·실시간 API 연동 및 서비스 배포)</td>
+              </tr>
+              <tr>
+                <td class="comp-cat-cell">실무 프로젝트</td>
+                <td class="comp-general-cell">단기 자율 팀 프로젝트 (멘토링 부족)</td>
+                <td class="comp-growth-cell">총 350시간 중 217시간(62%) KT 현업 멘토 연계 실무 프로젝트 수행</td>
+              </tr>
+              <tr>
+                <td class="comp-cat-cell">커리어 연계</td>
+                <td class="comp-general-cell">수료 후 개별 취업 준비</td>
+                <td class="comp-growth-cell">우수수료생 KT그룹·협력사 채용 연계 + 미래내일 일경험(인턴형) 매칭</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- AX란 무엇인가 정의 박스 -->
+      <div class="definition-box reveal-on-scroll">
+        <div class="definition-title">| KT그룹이 정의하는 AX (AI Transformation) 전문가란?</div>
+        <div class="definition-lead">
+          기업의 산업별 페인 포인트를 분석해 ROI와 리스크까지 고려한 AX 전략을 수립하고,<br />
+          여러 AI 에이전트가 협업하는 Multi-Agent 웹서비스로 실제 구현·배포하는 인재입니다.
+        </div>
+        <div class="definition-steps">
+          <div class="def-step-item">① 금융·물류 등 산업 현장의 문제를 진단해 <strong>AI 전환 시나리오와 ROI를 기획</strong>하고</div>
+          <div class="def-step-item">② LangGraph·RAG·MCP 기반으로 <strong>직무 자동화 Multi-Agent를 오케스트레이션</strong>하며</div>
+          <div class="def-step-item">③ CRUD·API 연동이 완비된 <strong>AI Native 웹서비스로 개발·배포</strong>합니다</div>
+        </div>
+      </div>
+
+      <!-- 3대 핵심 역량 포인트 (POINT 1 ~ 3) -->
+      <div>
+        <h3 class="reveal-on-scroll" style="font-size: 24px; font-weight: 900; text-align: center; margin-bottom: 24px;">
+          본 과정에서 완성하는 3대 핵심 실무 역량
+        </h3>
+        <div class="points-stack">
+          <div class="point-row-card reveal-on-scroll">
+            <div class="point-left">
+              <div class="point-num">POINT 1 · 70시간</div>
+              <div class="point-name">Agentic AI &<br />Multi-Agent 구현</div>
+            </div>
+            <div class="point-right">
+              <div class="point-tools">Prompt & Context Engineering · LLMOps · LangChain · RAG · LangGraph · LangSmith · MCP</div>
+              <div class="point-desc">단일 프롬프트를 넘어 스스로 추론·도구 호출·협업하는 멀티 에이전트 워크플로우 설계 및 구현</div>
+            </div>
+          </div>
+
+          <div class="point-row-card reveal-on-scroll">
+            <div class="point-left">
+              <div class="point-num">POINT 2 · 35시간</div>
+              <div class="point-name">AI Native<br />웹서비스 개발</div>
+            </div>
+            <div class="point-right">
+              <div class="point-tools">AI 활용 웹서비스 아키텍처 · CRUD 및 게시판 구현 · OpenAPI/LLM API 연동 및 스트리밍</div>
+              <div class="point-desc">에이전트 엔진을 실제 사용자가 경험할 수 있는 완성형 웹 애플리케이션으로 풀스택 연동 개발</div>
+            </div>
+          </div>
+
+          <div class="point-row-card reveal-on-scroll">
+            <div class="point-left">
+              <div class="point-num">POINT 3 · 14시간 + 217시간</div>
+              <div class="point-name">AX 기획·관리 &<br />기업 실무 프로젝트</div>
+            </div>
+            <div class="point-right">
+              <div class="point-tools">산업별 AI 전환 시나리오 · ROI 분석 · 사업 심의 Risk 관리 · 현업 멘토링 · 서비스 기획/개발/배포</div>
+              <div class="point-desc">KT 현업 멘토와 함께 특정 산업(금융/물류 등)의 직무 자동화 전용 멀티 에이전트 서비스 완성</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 350시간 실전 커리큘럼 섹션 -->
+  <section id="curriculum" style="background-color: var(--bg-section-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">CURRICULUM · 교육 세부내용</span>
+        <h2 class="section-title">
+          이론·실습부터 217시간 기업 실무 프로젝트까지,<br />
+          <span class="text-accent">총 350시간 AX 실전 커리큘럼</span>
+        </h2>
+        <p class="section-desc">
+          정규교과(119시간)로 기초와 심화 기술을 탄탄히 다지고, 특강(14시간)과 실무 연계 프로젝트(217시간)로 현업 수준의 결과물을 완성합니다.
+        </p>
+      </div>
+
+      <!-- 인터랙티브 5단계 탭 버튼 -->
+      <div class="curriculum-tabs reveal-on-scroll">
+        <button class="curr-tab-btn active" onclick="switchTab(0)">01. Agentic AI (70h)</button>
+        <button class="curr-tab-btn" onclick="switchTab(1)">02. AI Native 웹서비스 개발 (35h)</button>
+        <button class="curr-tab-btn" onclick="switchTab(2)">03. AX 기획·관리 (14h)</button>
+        <button class="curr-tab-btn" onclick="switchTab(3)">04. 취업·트렌드 특강 (14h)</button>
+        <button class="curr-tab-btn" onclick="switchTab(4)">05. 기업 실무 연계 프로젝트 (217h)</button>
+      </div>
+
+      <!-- 탭 상세 내용 -->
+      <div class="curriculum-content-wrap reveal-on-scroll">
+        <!-- Tab 0 -->
+        <div class="curriculum-content" id="tab-content-0">
+          <div class="step-meta-line">
+            <span>정규교과 (이론/실습) 교육</span>
+            <span>·</span>
+            <span>70시간</span>
+          </div>
+          <h3 class="step-title">Agentic AI (생성형 AI 심화 및 멀티 에이전트 워크플로우)</h3>
+          <p class="step-desc">LLM의 맥락 제어부터 RAG 파이프라인, LangGraph·MCP 기반 멀티 에이전트 설계 및 구현까지 집중 실습합니다.</p>
+          <ul class="topics-list">
+            <li class="topic-item"><strong>GenAI 심화:</strong> Prompt & Context Engineering 정밀 설계 및 LLMOps 운영 파이프라인 이해</li>
+            <li class="topic-item"><strong>Agent 개요 및 아키텍처:</strong> LangChain 프레임워크, RAG(검색증강생성) 파이프라인, Tool-calling Agent 구조</li>
+            <li class="topic-item"><strong>Agentic 워크플로우 제어:</strong> LangGraph 기반 상태 제어, LangSmith 모니터링·평가, MCP(Model Context Protocol) 연동</li>
+            <li class="topic-item"><strong>Multi-Agent 설계/구현 실습:</strong> 역할 기반 다중 에이전트 협업 구조 설계 및 오케스트레이션 실습</li>
+          </ul>
+          <div class="keyword-line">
+            <strong>주요 습득 기술:</strong> GenAI (Prompt & Context Engineering, LLMOps) / LangChain, RAG, Agent / LangGraph, LangSmith, MCP / Multi-Agent 설계·구현
+          </div>
+        </div>
+
+        <!-- Tab 1 -->
+        <div class="curriculum-content" id="tab-content-1" style="display:none;">
+          <div class="step-meta-line">
+            <span>정규교과 (이론/실습) 교육</span>
+            <span>·</span>
+            <span>35시간</span>
+          </div>
+          <h3 class="step-title">AI Native 웹서비스 개발</h3>
+          <p class="step-desc">구현한 AI 에이전트와 LLM 기능을 실제 웹 서비스 환경에 통합하여 엔드투엔드 애플리케이션으로 개발합니다.</p>
+          <ul class="topics-list">
+            <li class="topic-item"><strong>AI 활용 웹서비스 개발:</strong> 사용자 인터랙션 중심의 AI Native 웹 서비스 프론트엔드·백엔드 구조 설계</li>
+            <li class="topic-item"><strong>CRUD와 게시판 구현:</strong> 데이터베이스 연동 기반 생성·조회·수정·삭제(CRUD) 및 서비스 게시판 기능 구현</li>
+            <li class="topic-item"><strong>API 연동 및 개발:</strong> OpenAPI / LLM API 호출, JSON 응답 파싱, 실시간 스트리밍 연동 및 RESTful API 서버 구축</li>
+          </ul>
+          <div class="keyword-line">
+            <strong>주요 습득 기술:</strong> AI 활용 웹서비스 개발 / CRUD와 게시판 구현 / API 연동 및 개발
+          </div>
+        </div>
+
+        <!-- Tab 2 -->
+        <div class="curriculum-content" id="tab-content-2" style="display:none;">
+          <div class="step-meta-line">
+            <span>정규교과 (이론/실습) 교육</span>
+            <span>·</span>
+            <span>14시간</span>
+          </div>
+          <h3 class="step-title">AX 기획·관리 (비즈니스 가치 및 리스크 분석)</h3>
+          <p class="step-desc">단순 기술 구현을 넘어 실제 기업이 AI를 도입할 때 요구되는 ROI 분석, 리스크 심의, 도메인별 페인포인트를 기획합니다.</p>
+          <ul class="topics-list">
+            <li class="topic-item"><strong>산업별 AI 전환 시나리오 및 ROI 분석 기획:</strong> AI 도입 비용 대비 정량·정성적 비즈니스 기대효과 산출</li>
+            <li class="topic-item"><strong>사업 심의 기반 Risk 관리:</strong> 보안, 할루시네이션, 데이터 거버넌스, 운영 비용 등 엔터프라이즈 리스크 관리 방안 수립</li>
+            <li class="topic-item"><strong>특정 산업(금융/물류 등) 페인 포인트 분석:</strong> 도메인별 핵심 병목 구간 도출 및 AX 해결 과제 정의</li>
+            <li class="topic-item"><strong>AX 기획 실무 (파이프라인 구축):</strong> 요구사항 정의서부터 서비스 아키텍처·파이프라인 기획서 작성 실무</li>
+          </ul>
+          <div class="keyword-line">
+            <strong>주요 습득 기술:</strong> 산업별 AI 전환 시나리오 및 ROI 분석 기획 / 사업 심의 기반 Risk 관리 / 금융·물류 페인 포인트 분석 / AX 기획 파이프라인 구축
+          </div>
+        </div>
+
+        <!-- Tab 3 -->
+        <div class="curriculum-content" id="tab-content-3" style="display:none;">
+          <div class="step-meta-line">
+            <span>특강 (트렌드 · 커리어)</span>
+            <span>·</span>
+            <span>14시간</span>
+          </div>
+          <h3 class="step-title">취업특강 / 트렌드특강</h3>
+          <p class="step-desc">현업 전문가로부터 최신 AI 에이전트 산업 동향과 기업이 원하는 AX 개발자·기획자의 핵심 역량을 직접 듣습니다.</p>
+          <ul class="topics-list">
+            <li class="topic-item"><strong>최신 AI 에이전트 기술 동향 및 실무 사례:</strong> 국내외 빅테크 및 KT그룹의 에이전트 도입 사례 분석</li>
+            <li class="topic-item"><strong>기업의 AX 현황 및 개발자의 필요 역량:</strong> 현업 채용 시장에서 요구하는 AX 인재상과 기술 스택 점검</li>
+            <li class="topic-item"><strong>산업별 취업서류, 면접, 포트폴리오 전략 수립:</strong> 프로젝트 산출물을 합격 포트폴리오로 구조화하는 실전 전략</li>
+          </ul>
+          <div class="keyword-line">
+            <strong>주요 습득 기술:</strong> 최신 AI에이전트 기술 동향 및 실무 사례 / 기업의 AX현황 및 필요 역량 / 산업별 취업서류·면접·포트폴리오 전략
+          </div>
+        </div>
+
+        <!-- Tab 4 -->
+        <div class="curriculum-content" id="tab-content-4" style="display:none;">
+          <div class="step-meta-line">
+            <span>프로젝트 (전체 과정의 62% 비중)</span>
+            <span>·</span>
+            <span>217시간</span>
+          </div>
+          <h3 class="step-title">AX 관점 기업 실무 연계 프로젝트</h3>
+          <p class="step-desc">KT 현업 멘토와 함께 실제 산업 과제를 해결하는 AX 전략을 수립하고 멀티 에이전트 서비스를 기획·개발·배포합니다.</p>
+          <ul class="topics-list">
+            <li class="topic-item"><strong>현업 멘토와 함께하는 AX 전략 수립:</strong> 기업 실무 관점의 문제 정의, ROI 검증, 서비스 설계 피드백</li>
+            <li class="topic-item"><strong>산업별 직무 자동화 전용 에이전트 구축:</strong> 도메인 특화 지식베이스(RAG)와 도구(MCP/API)를 결합한 전문 에이전트 제작</li>
+            <li class="topic-item"><strong>Multi Agent 오케스트레이션:</strong> 플래너·리서처·실행·검증 에이전트 간 협업 파이프라인 고도화</li>
+            <li class="topic-item"><strong>서비스 기획 / 개발 / 배포:</strong> 실제 동작하는 웹 서비스로 패키징 및 클라우드/서버 배포 완성</li>
+          </ul>
+          <div class="keyword-line">
+            <strong>주요 습득 기술:</strong> 현업 멘토링 기반 AX 전략 수립 / 산업별 직무 자동화 전용 에이전트 구축 / Multi Agent 오케스트레이션 / 서비스 기획·개발·배포
+          </div>
+        </div>
+      </div>
+
+      <!-- 전체 교육 세부내용 요약 테이블 -->
+      <div class="syllabus-table-card reveal-on-scroll">
+        <div style="margin-bottom: 18px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
+          <h3 style="font-size: 21px; font-weight: 900; color: #ffffff;">교육 세부내용 한눈에 보기 (총 350시간)</h3>
+          <span style="font-size: 13.5px; color: var(--accent-amber); font-weight: 700;">교육기간: 2026. 12. 14 ~ 2027. 02. 25</span>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="syllabus-table">
+            <thead>
+              <tr>
+                <th>교과목</th>
+                <th>구성내용</th>
+                <th>주요 습득 기술 및 세부 학습 내용</th>
+                <th style="text-align: right;">시수</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="syllabus-cat-td">정규교과<br />(이론/실습)</td>
+                <td class="syllabus-subj-td">Agentic AI</td>
+                <td>
+                  · GenAI (Prompt & Context Engineering, LLMOps)<br />
+                  · Agent 개요 (LangChain, RAG, Agent)<br />
+                  · Agentic 워크플로우 (LangGraph, LangSmith, MCP 등)<br />
+                  · Multi-Agent 설계/구현 실습
+                </td>
+                <td class="syllabus-hour-td">70h</td>
+              </tr>
+              <tr>
+                <td class="syllabus-cat-td">정규교과<br />(이론/실습)</td>
+                <td class="syllabus-subj-td">AI Native 웹서비스 개발</td>
+                <td>
+                  · AI 활용 웹서비스 개발<br />
+                  · CRUD와 게시판 구현<br />
+                  · API 연동 및 개발
+                </td>
+                <td class="syllabus-hour-td">35h</td>
+              </tr>
+              <tr>
+                <td class="syllabus-cat-td">정규교과<br />(이론/실습)</td>
+                <td class="syllabus-subj-td">AX 기획·관리</td>
+                <td>
+                  · 산업별 AI 전환 시나리오 및 ROI 분석 기획<br />
+                  · 사업 심의 기반 Risk 관리<br />
+                  · 특정 산업(금융/물류 등) 페인 포인트 분석<br />
+                  · AX 기획 실무 (파이프라인 구축)
+                </td>
+                <td class="syllabus-hour-td">14h</td>
+              </tr>
+              <tr>
+                <td class="syllabus-cat-td" style="color: var(--aiplus-blue);">특강</td>
+                <td class="syllabus-subj-td">취업특강 / 트렌드특강</td>
+                <td>
+                  · 최신 AI에이전트 기술 동향 및 실무 사례<br />
+                  · 기업의 AX현황 및 개발자의 필요 역량<br />
+                  · 산업별 취업서류, 면접, 포트폴리오 전략 수립
+                </td>
+                <td class="syllabus-hour-td">14h</td>
+              </tr>
+              <tr>
+                <td class="syllabus-cat-td" style="color: var(--sesac-green);">프로젝트</td>
+                <td class="syllabus-subj-td">AX 관점 기업 실무<br />연계 프로젝트</td>
+                <td>
+                  · 현업 멘토와 함께하는 AX 전략 수립<br />
+                  · 산업별 직무 자동화 전용 에이전트 구축<br />
+                  · Multi Agent 오케스트레이션<br />
+                  · 서비스 기획 / 개발 / 배포
+                </td>
+                <td class="syllabus-hour-td">217h</td>
+              </tr>
+              <tr style="background: rgba(255, 46, 76, 0.08);">
+                <td class="syllabus-cat-td" colspan="2" style="color: #ffffff; font-size: 15.5px;">총 교육 시수 합계</td>
+                <td style="color: #ffffff; font-weight: 700;">이론·실습(119시간) + 특강(14시간) + 기업 실무 연계 프로젝트(217시간)</td>
+                <td class="syllabus-hour-td" style="font-size: 18px; color: #ffffff;">350h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 실무 프로젝트 & 포트폴리오 산출물 섹션 -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">PROJECT & PORTFOLIO · 실무 산출물</span>
+        <h2 class="section-title">
+          217시간의 기업 실무 연계 프로젝트로<br />
+          <span class="text-accent">검증된 AX 포트폴리오</span>를 완성합니다
+        </h2>
+        <p class="section-desc">
+          단순 코드 조각이 아니라, <strong>AX 기획서 · Multi-Agent 오케스트레이션 엔진 · AI Native 웹서비스 배포본</strong>까지 한 번에 완성합니다.
+        </p>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Deliverable 1 -->
+        <div class="project-card reveal-on-scroll">
+          <div>
+            <div class="project-kicker">DELIVERABLE 01 · AX 기획 & 거버넌스</div>
+            <h3 class="project-title">산업별 AX 전환 전략 & ROI/Risk 기획서</h3>
+            <div class="proj-viz-box">
+              <div class="kpi-3row">
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">타깃 도메인</div>
+                  <div class="kpi-mini-val">금융 · 물류</div>
+                </div>
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">비즈니스 검증</div>
+                  <div class="kpi-mini-val">ROI 시뮬레이션</div>
+                </div>
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">안정성 거버넌스</div>
+                  <div class="kpi-mini-val">Risk 심의모델</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-meta-row">
+            <div><span class="proj-meta-label">수행 내용</span> <strong>특정 산업 페인포인트 도출 및 AI 전환 파이프라인 설계</strong> (도입 비용·기대효과 분석 및 사업 심의 리스크 관리)</div>
+            <div><span class="proj-meta-label">포트폴리오</span> <strong>산업별 AX 전략 기획서 · ROI 분석서 · 파이프라인 명세서</strong></div>
+          </div>
+        </div>
+
+        <!-- Deliverable 2 -->
+        <div class="project-card reveal-on-scroll">
+          <div>
+            <div class="project-kicker">DELIVERABLE 02 · Agentic Workflow</div>
+            <h3 class="project-title">LangGraph · MCP 기반 Multi-Agent 시스템</h3>
+            <div class="proj-viz-box">
+              <div class="n8n-flow-row">
+                <div class="n8n-node">Planner Agent</div>
+                <div class="n8n-node">RAG · MCP Tool</div>
+                <div class="n8n-node">Worker Agent</div>
+                <div class="n8n-node">Verifier · LLMOps</div>
+              </div>
+              <div style="text-align: center; font-size: 12.5px; color: var(--text-sub); background: rgba(255,255,255,0.03); padding: 7px; border-radius: 8px;">
+                ✓ LangSmith 트레이싱 연동 · 컨텍스트 라우팅 · 자동 검증 루프
+              </div>
+            </div>
+          </div>
+          <div class="proj-meta-row">
+            <div><span class="proj-meta-label">수행 내용</span> <strong>복잡한 직무를 분담·협업하는 멀티 에이전트 아키텍처 구축</strong> (LangChain, RAG, LangGraph, LangSmith, MCP 활용)</div>
+            <div><span class="proj-meta-label">포트폴리오</span> <strong>Multi-Agent 오케스트레이션 코드 · LLMOps 평가 리포트</strong></div>
+          </div>
+        </div>
+
+        <!-- Deliverable 3 -->
+        <div class="project-card reveal-on-scroll">
+          <div>
+            <div class="project-kicker">DELIVERABLE 03 · AI Native Web Service</div>
+            <h3 class="project-title">실시간 API 연동 AI Native 웹 애플리케이션</h3>
+            <div class="proj-viz-box">
+              <div class="sql-code-box">
+                <span class="sql-kw">async def</span> <span class="sql-fn">run_multi_agent_stream</span>(request):<br />
+                &nbsp;&nbsp;<span class="sql-kw">async for</span> event <span class="sql-kw">in</span> graph.astream_events(input_state):<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-kw">yield</span> format_sse_payload(event)
+              </div>
+            </div>
+          </div>
+          <div class="proj-meta-row">
+            <div><span class="proj-meta-label">수행 내용</span> <strong>CRUD·게시판 및 비동기 LLM API 스트리밍이 결합된 웹서비스 구현</strong> (프론트엔드-백엔드-에이전트 통합)</div>
+            <div><span class="proj-meta-label">포트폴리오</span> <strong>풀스택 웹서비스 소스코드 · API 연동 명세서 · 시연 환경</strong></div>
+          </div>
+        </div>
+
+        <!-- Deliverable 4 -->
+        <div class="project-card reveal-on-scroll">
+          <div>
+            <div class="project-kicker">DELIVERABLE 04 · Career Readiness</div>
+            <h3 class="project-title">실전 맞춤형 기술 이력서 & 포트폴리오</h3>
+            <div class="proj-viz-box">
+              <div class="kpi-3row">
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">서류 컨설팅</div>
+                  <div class="kpi-mini-val">1:1 첨삭</div>
+                </div>
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">면접 대비</div>
+                  <div class="kpi-mini-val">실전 모의면접</div>
+                </div>
+                <div class="kpi-mini">
+                  <div class="kpi-mini-label">역량 증명</div>
+                  <div class="kpi-mini-val">자격증 바우처</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-meta-row">
+            <div><span class="proj-meta-label">수행 내용</span> <strong>기업의 AX 현황 분석 및 산업별 맞춤형 서류·면접 전략 수립</strong> (전담 잡코디 및 1:1 커리어 멘토링)</div>
+            <div><span class="proj-meta-label">포트폴리오</span> <strong>AX 기획·개발 통합 포트폴리오 · 직무 맞춤 이력서</strong></div>
+          </div>
+        </div>
+
+        <!-- Final Capstone Project -->
+        <div class="project-card final-span reveal-on-scroll">
+          <div>
+            <div class="project-kicker">CAPSTONE PROJECT · 217시간 집중 수행</div>
+            <h3 class="project-title">KT 현업 멘토와 함께하는 AX 관점 기업 실무 연계 프로젝트</h3>
+            <div class="proj-viz-box">
+              <div style="font-size: 13.5px; font-weight: 800; color: var(--sesac-green); margin-bottom: 12px;">
+                [엔드투엔드 수행 프로세스] AX 전략 수립 → 산업별 직무 자동화 전용 에이전트 구축 → Multi-Agent 오케스트레이션 → 서비스 기획/개발/배포
+              </div>
+              <div class="kpi-3row" style="grid-template-columns: repeat(1, 1fr); gap: 10px;">
+                <div class="kpi-mini" style="text-align: left; padding: 14px 16px;">
+                  <div class="kpi-mini-label">실무 프로젝트 핵심 강점</div>
+                  <div class="kpi-mini-val" style="font-size: 15px; color: #ffffff; line-height: 1.55;">
+                    기업 내부 데이터셋 및 실무 콘텐츠 지원 · 현업 멘토 밀착 코칭 · 실제 배포 가능한 수준의 엔터프라이즈 멀티 에이전트 서비스 완성
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-meta-row">
+            <div><span class="proj-meta-label">핵심 목표</span> <strong>현업에서 즉시 활용 가능한 도메인 특화 Multi-Agent 서비스 기획부터 클라우드 배포까지 전 과정 완주</strong></div>
+            <div><span class="proj-meta-label">연계 혜택</span> <strong>우수 수료생 KT그룹 및 협력사 연계 채용 기회 · 기업 공동 수료증 발급</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 교육혜택 및 취업지원 섹션 -->
+  <section id="benefits" style="background-color: var(--bg-section-alt); border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">BENEFITS & CAREER SUPPORT · 교육혜택 및 취업지원</span>
+        <h2 class="section-title">
+          교육에만 몰입할 수 있도록,<br />
+          <span class="text-accent">KT그룹 x 청년취업사관학교</span>가 전폭 지원합니다
+        </h2>
+        <p class="section-desc">
+          교육비 전액 무료는 기본, KT그룹 및 협력사 채용 연계부터 미래내일 일경험(인턴형) 매칭까지 실질적인 커리어 혜택을 제공합니다.
+        </p>
+      </div>
+
+      <!-- 교육혜택 4종 -->
+      <div style="margin-bottom: 36px;">
+        <h3 class="reveal-on-scroll" style="font-size: 21px; font-weight: 900; margin-bottom: 18px; color: #ffffff;">
+          01. 핵심 교육혜택 (실무 경험 및 기업 연계)
+        </h3>
+        <div class="benefits-6grid">
+          <div class="benefit-item-card featured reveal-on-scroll">
+            <div>
+              <div class="benefit-num">EDUCATION BENEFIT 01</div>
+              <h4 class="benefit-item-title">우수 수료생 대상 KT그룹 및 협력사 연계 채용 기회 제공</h4>
+            </div>
+            <p class="benefit-item-desc">과정을 우수하게 수료한 인재에게 KT그룹 및 주요 협력사·파트너사 채용 연계 기회를 직접 제공합니다.</p>
+          </div>
+
+          <div class="benefit-item-card featured reveal-on-scroll">
+            <div>
+              <div class="benefit-num">EDUCATION BENEFIT 02</div>
+              <h4 class="benefit-item-title">AX 분야 실무 프로젝트 기반 단기 실무 경험 지원</h4>
+            </div>
+            <p class="benefit-item-desc">단순 이론 학습을 넘어 실제 기업의 AX 과제를 수행하며 이력서에 즉시 기재 가능한 단기 실무 경험을 쌓습니다.</p>
+          </div>
+
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num">EDUCATION BENEFIT 03</div>
+              <h4 class="benefit-item-title">미래내일 일경험(인턴형) 프로그램 연계 및 기업 매칭</h4>
+            </div>
+            <p class="benefit-item-desc">수료 후 실제 기업 현장에서 인턴형으로 일경험을 쌓을 수 있도록 미래내일 일경험 프로그램 및 기업 매칭을 지원합니다.</p>
+          </div>
+
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num">EDUCATION BENEFIT 04</div>
+              <h4 class="benefit-item-title">KT 산업 기반 실무 중심 교육 및 프로젝트 수행 지원</h4>
+            </div>
+            <p class="benefit-item-desc">기업 내부 데이터셋 및 실무 콘텐츠를 지원하며, KT 현업 멘토진과 함께 산업 기반 프로젝트를 수행합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 취업지원 4종 -->
+      <div>
+        <h3 class="reveal-on-scroll" style="font-size: 21px; font-weight: 900; margin-bottom: 18px; color: #ffffff;">
+          02. 맞춤형 취업지원 프로그램 (서류 · 면접 · 자격증 · 박람회)
+        </h3>
+        <div class="benefits-6grid">
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num" style="color: var(--aiplus-blue);">CAREER SUPPORT 01</div>
+              <h4 class="benefit-item-title">KT그룹 및 협력사 연계 채용 기회 제공</h4>
+            </div>
+            <p class="benefit-item-desc">AI+ 아카데미 참여기업 인턴십, 협력사 및 파트너사 인재 추천과 기업 공동 수료증 발급 혜택을 제공합니다.</p>
+          </div>
+
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num" style="color: var(--aiplus-blue);">CAREER SUPPORT 02</div>
+              <h4 class="benefit-item-title">자격증 바우처 및 모의면접 지원</h4>
+            </div>
+            <p class="benefit-item-desc">직무 역량을 객관적으로 증명할 수 있는 자격증 응시 바우처 지원과 실전 기술·임원 모의면접을 지원합니다.</p>
+          </div>
+
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num" style="color: var(--aiplus-blue);">CAREER SUPPORT 03</div>
+              <h4 class="benefit-item-title">1:1 맞춤형 커리어 멘토링 및 컨설팅 지원</h4>
+            </div>
+            <p class="benefit-item-desc">캠퍼스 전담 잡코디 배치 및 전문 컨설턴트의 1:1 이력서·포트폴리오 고도화, 창업자 사업화 전략 컨설팅을 제공합니다.</p>
+          </div>
+
+          <div class="benefit-item-card reveal-on-scroll">
+            <div>
+              <div class="benefit-num" style="color: var(--aiplus-blue);">CAREER SUPPORT 04</div>
+              <h4 class="benefit-item-title">취업캠프 및 박람회 참여 기회 제공</h4>
+            </div>
+            <p class="benefit-item-desc">채용 기업과 직접 만나는 취업캠프, 일자리 박람회, 수료생 커뮤니티 및 동문회 네트워킹 참여 기회를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지원자격 및 참여 대상 안내 섹션 -->
+  <section id="qualification">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">ELIGIBILITY & REQUIREMENTS · 지원자격</span>
+        <h2 class="section-title">
+          지원자격 및 <span class="text-accent">참여 대상 안내</span>
+        </h2>
+        <p class="section-desc">
+          기본 참여 대상 요건과 필수/우대 기술 역량을 확인하고 지금 도전하세요.
+        </p>
+      </div>
+
+      <!-- 3단 지원자격 카드 (기본자격 / 필수사항 / 우대·권장역량) -->
+      <div class="qual-3grid">
+        <!-- 1. 기본자격 -->
+        <div class="qual-card reveal-on-scroll">
+          <span class="qual-tag">01 · BASIC ELIGIBILITY</span>
+          <h3 class="qual-title">1. 기본자격</h3>
+          <ul class="qual-list">
+            <li>
+              <strong>서울시민 및 거소자:</strong><br />
+              AI 취·창업을 희망하는 만 15세 이상 서울시민 및 거소자
+            </li>
+            <li>
+              <strong>타지역 거주자 지원 가능 요건:</strong><br />
+              서울소재 대학(원) 재학생 또는 최근 3년 이내 서울소재 대학(원) 졸업생
+            </li>
+            <li>
+              <strong>서울 기업 근무 경력자:</strong><br />
+              최근 3년 이내 서울시 소재 기업에 재직 또는 근무한 이력이 있는 경우
+            </li>
+          </ul>
+        </div>
+
+        <!-- 2. 필수사항 -->
+        <div class="qual-card must-have reveal-on-scroll">
+          <span class="qual-tag">02 · REQUIRED SKILLS (필수)</span>
+          <h3 class="qual-title">2. 필수사항</h3>
+          <ul class="qual-list">
+            <li>
+              <strong>Python 프로그래밍:</strong><br />
+              Python 기초 문법 이해 및 코드 작성·실행이 가능한 분
+            </li>
+            <li>
+              <strong>OpenAPI / LLM 기초 활용:</strong><br />
+              API 키 발급 및 호출, 프롬프트 구성 이해, JSON 응답 파싱 기초 경험 보유자
+            </li>
+            <li>
+              <strong>전일제 오프라인 참여:</strong><br />
+              2026.12.14 ~ 2027.02.25(350시간) 동안 동작캠퍼스 출석 교육에 성실히 참여 가능한 분
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. 우대/권장역량 -->
+        <div class="qual-card reveal-on-scroll">
+          <span class="qual-tag" style="color: var(--aiplus-blue);">03 · PREFERRED SKILLS (우대/권장)</span>
+          <h3 class="qual-title">3. 우대 / 권장역량</h3>
+          <ul class="qual-list">
+            <li>
+              <strong>HTTP 프로토콜 · 스트리밍:</strong><br />
+              HTTP Polling · SSE(Server-Sent Events) · WebSocket 개념 및 활용 이해
+            </li>
+            <li>
+              <strong>Python 비동기 프로그래밍:</strong><br />
+              <code>async</code> / <code>await</code> 구문, 이벤트 루프(Event Loop) 개념 이해
+            </li>
+            <li>
+              <strong>LangChain / LangGraph 실습 경험:</strong><br />
+              LLM 프레임워크를 활용한 체인·에이전트 기초 실습 경험
+            </li>
+            <li>
+              <strong>RAG 파이프라인 구현 경험:</strong><br />
+              문서 임베딩 및 벡터 검색 기반 검색증강생성 파이프라인 경험
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 참여 대상 및 증빙서류 상세 안내 박스 -->
+      <div class="overview-grid reveal-on-scroll" style="grid-template-columns: 1fr;">
+        <div class="overview-item full-span">
+          <div class="overview-label" style="font-size: 14.5px;">참여 대상 및 입학 증빙서류 상세 안내</div>
+          <div class="overview-value">
+            본 교육과정은 <strong>서울시 거주자 대상 참여가 가능</strong>합니다. 다만, <strong>타지역 거주자의 경우 아래 요건 중 하나 이상을 충족하면 참여가 가능</strong>합니다.
+            <div class="overview-sublist" style="margin-top: 14px;">
+              <div><strong>· 타지역 거주자 인정 요건 1:</strong> 서울시 소재 대학 또는 대학원에 재학·졸업한 경우 (최근 3년 이내)</div>
+              <div><strong>· 타지역 거주자 인정 요건 2:</strong> 최근 3년 이내 서울시 소재 기업에 재직 또는 근무한 이력이 있는 경우</div>
+              <div style="margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.06);">
+                <strong style="color: var(--accent-amber);">[제출 증빙서류 안내]</strong><br />
+                · <strong>서울시민 or 서울 거주자:</strong> 주민등록등본, 기숙사 / 고시원 거주 확인서, 본인명의 공공요금고지서 / 부동산 계약서 등<br />
+                · <strong>타지역 거주자:</strong> 서울소재 대학(원) 재학증명서 또는 졸업증명서, 서울시 소재 기업 근무 확인용 경력증명서 등(최근 3년 이내)
+              </div>
+              <div style="color: #fda4af; font-size: 13.5px; margin-top: 4px;">
+                ※ 해당 요건은 추후 입학 시 증빙서류 제출을 통해 확인될 예정이며, 사실과 다를 시 입학이 취소될 수 있습니다.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 자주 묻는 질문 FAQ 섹션 -->
+  <section id="faq" style="background-color: var(--bg-section-alt); border-top: 1px solid var(--border-color);">
+    <div class="container">
+      <div class="section-header reveal-on-scroll">
+        <span class="section-kicker">FAQ · 자주 묻는 질문</span>
+        <h2 class="section-title">궁금하신 점을 확인해 보세요</h2>
+        <p class="section-desc">지원자분들이 가장 많이 문의하시는 핵심 사항을 정리했습니다.</p>
+      </div>
+
+      <div class="faq-container">
+        <!-- Q1 -->
+        <div class="faq-item active reveal-on-scroll">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span><span class="faq-q-prefix">Q.</span>교육비와 10만원 예치금은 어떻게 운영되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            본 교육과정은 서울시 청년취업사관학교 및 AI+ 아카데미 지원 과정으로 <strong>교육비 전액 무료(0원)</strong>입니다.<br />
+            노쇼(No-show) 방지 및 성실한 교육 이수를 위해 최종 합격자 대상으로 <strong>10만원의 예치금을 수령하며, 수료요건(출석률 80% 이상 또는 수강 30% 이수 후 취·창업 성공) 충족 시 100% 전액 반환</strong>됩니다.
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item reveal-on-scroll">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span><span class="faq-q-prefix">Q.</span>서울 외 타지역 거주자도 지원할 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            네, 가능합니다. 현재 주민등록상 서울 거주자가 아니더라도 아래 요건 중 하나 이상에 해당하면 참여 가능합니다.<br />
+            1) <strong>기숙사·고시원 거주 확인서, 본인명의 공공요금고지서, 부동산 계약서</strong> 등으로 서울 거소 증빙이 가능한 분<br />
+            2) <strong>서울시 소재 대학 또는 대학원에 재학 중이거나 최근 3년 이내 졸업</strong>한 분<br />
+            3) <strong>최근 3년 이내 서울시 소재 기업에 재직 또는 근무한 이력</strong>이 있는 분
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item reveal-on-scroll">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span><span class="faq-q-prefix">Q.</span>지원 전 어느 정도의 코딩 실력이 필요한가요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            본 과정은 Agentic AI와 AI Native 웹서비스를 직접 구현하는 실전 과정이므로, <strong>Python 프로그래밍 기초</strong>와 <strong>OpenAPI/LLM 기초 활용(API 발급 및 호출, 프롬프트 구성 이해, JSON 응답 파싱)</strong>이 필수사항입니다.<br /><br />
+            추가로 HTTP 스트리밍(SSE·WebSocket), Python 비동기 프로그래밍(<code>async/await</code>), LangChain/LangGraph, RAG 경험이 있으시면 더욱 깊이 있게 과정을 소화하실 수 있으며 선발 시 우대됩니다.
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item reveal-on-scroll">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span><span class="faq-q-prefix">Q.</span>과정 중 조기 취·창업하게 되면 수료 인정이 되나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            네, 수료기준에 따라 <strong>전체 교육과정의 30% 이상을 이수한 후 취·창업에 성공할 경우 정상 수료로 인정</strong>되며, 납부하신 10만원 예치금 역시 100% 반환됩니다.
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item reveal-on-scroll">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            <span><span class="faq-q-prefix">Q.</span>수료 후 어떤 취업 지원을 받을 수 있나요?</span>
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            · <strong>KT그룹 및 협력사 연계 채용 기회 제공</strong> (우수 수료생 대상)<br />
+            · <strong>미래내일 일경험(인턴형) 프로그램 연계</strong> 및 AX 분야 단기 실무 프로젝트 경험 지원<br />
+            · <strong>1:1 맞춤형 커리어 멘토링 및 컨설팅</strong> (전담 잡코디 배치, 이력서·포트폴리오 고도화)<br />
+            · <strong>자격증 바우처 및 모의면접 지원</strong>, 취업캠프 및 박람회 참여 기회, 기업 공동 수료증 발급까지 다각도로 지원합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 오시는 길 (교육장소 안내) -->
+  <section id="location" style="background-color: var(--bg-section-alt); border-top: 1px solid var(--border-color);">
+    <div class="container reveal-on-scroll">
+      <div class="campus-card" style="width: 100%;">
+        <div style="display: grid; grid-template-columns: 1fr; gap: 24px;">
+          <div>
+            <span class="section-kicker">LOCATION · 교육장소 안내</span>
+            <h3 style="font-size: 28px; font-weight: 900; margin-bottom: 10px;">
+              청년취업사관학교 동작캠퍼스 <span style="color: var(--primary);">오시는 길</span>
+            </h3>
+            <p style="color: var(--text-sub); font-size: 15px;">
+              KT그룹 현업 멘토진과 함께 350시간 동안 AX 전략 기획 및 멀티 에이전트 서비스 개발자로 성장하는 공간입니다.
+            </p>
+          </div>
+
+          <div class="offline-4grid" style="margin-bottom: 0;">
+            <div style="background: rgba(255,255,255,0.03); padding: 22px 24px; border-radius: 16px; border: 1px solid var(--border-color);">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">교육장소 주소</div>
+              <div style="font-size: 16.5px; font-weight: 800; color: #ffffff; line-height: 1.5;">
+                서울 동작구 노량진로 10 스페이스살림 2층<br />
+                <span style="font-size: 14px; font-weight: 600; color: var(--text-sub);">(청년취업사관학교 동작캠퍼스)</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.03); padding: 22px 24px; border-radius: 16px; border: 1px solid var(--border-color);">
+              <div style="font-size: 13px; font-weight: 800; color: var(--primary); margin-bottom: 6px;">대중교통 안내</div>
+              <div style="font-size: 16.5px; font-weight: 800; color: #ffffff; line-height: 1.5;">
+                수도권 전철 1호선 · 신림선 대방역 2·3번 출구 인근<br />
+                <span style="font-size: 14px; font-weight: 600; color: var(--text-sub);">도보 약 2~3분 거리 (스페이스살림 2층)</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <span style="font-weight: 900; font-size: 15px; color: var(--sesac-green);">청년취업아카데미</span>
+              <span style="color: var(--border-light);">✕</span>
+              <span style="font-weight: 900; font-size: 15px; color: var(--aiplus-blue);">AI+ Academy</span>
+            </div>
+            <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+              <span>과정 상담신청하기</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <div style="font-weight: 800; font-size: 15px; color: #f8fafc; margin-bottom: 6px;">
+          청년취업아카데미 x KT그룹 AI+ 아카데미 | [KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발
+        </div>
+        <p>홈페이지 운영/담당자: 이재현</p>
+        <p>교육장소: 청년취업사관학교 동작캠퍼스 (서울 동작구 노량진로 10 스페이스살림 2층)</p>
+      </div>
+      <div>
+        <p>© 청년취업사관학교(SeSAC) & KT Group AI+ Academy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 하단 고정 지원 바 -->
+  <div class="sticky-bar">
+    <div class="sticky-content">
+      <div class="sticky-info">
+        <div class="sticky-title">[KT그룹] AX전략 기획 및 멀티 에이전트 서비스 개발 (350시간 · 동작캠퍼스)</div>
+      </div>
+      <a href="https://naver.me/xiL9LVA7" target="_blank" rel="noopener noreferrer" class="sticky-btn-apply">
+        <span>지금 상담·지원하기 (교육비 무료)</span>
+        <span>→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 자바스크립트 -->
+  <script>
+    // 스크롤 올리고 내릴 때마다 나타나고 사라지는 애니메이션 (IntersectionObserver)
+    const observerOptions = {
+      threshold: 0.12,
+      rootMargin: '-30px 0px -30px 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+      scrollObserver.observe(el);
+    });
+
+    // 5단계 커리큘럼 탭 전환 함수
+    function switchTab(stepIndex) {
+      const tabButtons = document.querySelectorAll('.curr-tab-btn');
+      tabButtons.forEach((btn, idx) => {
+        if (idx === stepIndex) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      for (let i = 0; i <= 4; i++) {
+        const content = document.getElementById('tab-content-' + i);
+        if (content) {
+          content.style.display = (i === stepIndex) ? 'block' : 'none';
+        }
+      }
+    }
+
+    // FAQ 아코디언 토글 함수
+    function toggleFaq(buttonElement) {
+      const item = buttonElement.parentElement;
+      const wasActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('active'));
+      if (!wasActive) {
+        item.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
