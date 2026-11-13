@@ -9,6 +9,7 @@
     <meta property="og:description" content="청년취업사관학교 동작캠퍼스 x KT그룹 실무 중심 AX 전략 수립 및 멀티 에이전트 서비스 개발 교육과정 안내" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="referrer" content="no-referrer" />
 
     <!-- Pretendard 웹폰트 -->
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
@@ -58,12 +59,11 @@
         opacity: 0;
         transform: translateY(32px) scale(0.985);
         transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
       }
 
       .reveal-on-scroll.visible {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: none;
       }
 
       /* 마우스 커서 호버 시 살짝 커지는 인터랙티브 공통 효과 */
@@ -96,8 +96,9 @@
       }
 
       .brand {
-        display: flex;
-        flex-direction: column;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
         transition: transform 0.2s ease;
       }
 
@@ -105,20 +106,32 @@
         transform: scale(1.025);
       }
 
-      .brand-title {
-        font-size: 20px;
-        font-weight: 800;
-        color: #0f172a;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
+      .brand-logo {
+        height: 44px;
+        width: auto;
+        max-width: 220px;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
       }
 
-      .brand-sub {
-        font-size: 13.5px;
-        font-weight: 700;
-        color: #0055ff;
-        margin-top: 2px;
-        letter-spacing: -0.01em;
+      .brand-text {
+        font-size: 19px;
+        font-weight: 800;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 480px) {
+        .brand-logo {
+          height: 34px;
+          max-width: 160px;
+        }
+        .brand-text {
+          font-size: 16px;
+        }
       }
 
       .nav-menu {
@@ -169,39 +182,94 @@
 
       /* Hero Section */
       .hero-section {
-        background: linear-gradient(180deg, #f2f7ff 0%, #f9fbff 60%, #ffffff 100%);
-        padding: 60px 0 84px;
+        position: relative;
+        isolation: isolate;
+        background-color: #f2f7ff;
+        padding: 64px 0 84px;
         border-bottom: 1px solid #f1f5f9;
+        overflow: hidden;
+      }
+
+      /* 배경 이미지 내 텍스트 제거 및 그래픽 블렌딩 레이어 */
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      /* 이미지 내부의 글자(얇은 획)를 지우고 색감·입체 그래픽만 남기는 레이어 */
+      .hero-bg-img-clean {
+        position: absolute;
+        top: -8%;
+        left: -14%;
+        width: 124%;
+        height: 116%;
+        object-fit: cover;
+        object-position: right center;
+        filter: url(#erase-bg-text) saturate(1.12) contrast(1.04);
+        opacity: 0.9;
+      }
+
+      /* 우측 그래픽 디테일 보강 레이어 (텍스트 영역은 마스크로 완전히 제거) */
+      .hero-bg-img-graphic {
+        position: absolute;
+        top: 0;
+        right: -4%;
+        width: 62%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 88% center;
+        filter: url(#soften-bg-text) saturate(1.08);
+        -webkit-mask-image: radial-gradient(ellipse 75% 75% at 76% 48%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 82%);
+        mask-image: radial-gradient(ellipse 75% 75% at 76% 48%, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.25) 55%, transparent 82%);
+        opacity: 0.85;
+      }
+
+      .hero-bg-overlay {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(242, 247, 255, 0.35) 0%, rgba(242, 247, 255, 0.08) 48%, rgba(255, 255, 255, 0.94) 88%, #ffffff 100%),
+          linear-gradient(90deg, #f2f7ff 0%, #f2f7ff 40%, rgba(242, 247, 255, 0.92) 56%, rgba(242, 247, 255, 0.38) 78%, rgba(242, 247, 255, 0.15) 100%);
+      }
+
+      @media (max-width: 900px) {
+        .hero-bg-img-graphic {
+          display: none;
+        }
+        .hero-bg-overlay {
+          background:
+            linear-gradient(180deg, rgba(242, 247, 255, 0.82) 0%, rgba(242, 247, 255, 0.9) 65%, #ffffff 100%);
+        }
+      }
+
+      .hero-content {
+        max-width: 680px;
+        margin-bottom: 58px;
       }
 
       .hero-eyebrow {
         display: flex;
         align-items: center;
-        gap: 12px;
         margin-bottom: 24px;
       }
 
-      .eyebrow-pill {
-        display: inline-block;
-        padding: 5px 14px;
-        background-color: #ffffff;
-        border: 1px solid #bfd7fe;
-        color: #0055ff;
-        font-size: 13px;
-        font-weight: 700;
-        border-radius: 9999px;
-        transition: transform 0.2s ease;
+      .hero-eyebrow-logo {
+        height: 68px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
       }
 
-      .eyebrow-pill:hover {
-        transform: scale(1.05);
-      }
-
-      .eyebrow-text {
-        font-size: 13px;
-        font-weight: 800;
-        color: #0055ff;
-        letter-spacing: 0.05em;
+      @media (max-width: 600px) {
+        .hero-eyebrow-logo {
+          height: 54px;
+        }
       }
 
       .hero-title {
@@ -210,6 +278,7 @@
         letter-spacing: -0.03em;
         line-height: 1.18;
         margin-bottom: 24px;
+        word-break: keep-all;
       }
 
       .title-blue {
@@ -224,17 +293,150 @@
 
       .hero-subtitle {
         font-size: 18px;
-        color: #475569;
+        color: #334155;
         line-height: 1.68;
         margin-bottom: 34px;
-        max-width: 700px;
+        max-width: 640px;
+        word-break: keep-all;
       }
 
       .hero-buttons {
         display: flex;
         align-items: center;
         gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: #0055ff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 4px 14px rgba(0, 85, 255, 0.25);
+      }
+
+      .btn-primary:hover {
+        background-color: #0047d6;
+        transform: scale(1.04);
+        box-shadow: 0 8px 22px rgba(0, 85, 255, 0.35);
+      }
+
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 26px;
+        background-color: rgba(255, 255, 255, 0.92);
+        border: 1px solid #bfd7fe;
+        color: #0055ff;
+        font-size: 16px;
+        font-weight: 700;
+        border-radius: 12px;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .btn-secondary:hover {
+        background-color: #ffffff;
+        border-color: #0055ff;
+        transform: scale(1.04);
+      }
+
+      /* 4-Column Summary Box */
+      .summary-box {
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid #dce8ff;
+        border-radius: 18px;
+        padding: 26px 30px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .summary-box:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 32px rgba(0, 85, 255, 0.1);
+      }
+
+      @media (max-width: 900px) {
+        .hero-bg-img {
+          width: 100%;
+          opacity: 0.45;
+        }
+        .hero-bg-overlay {
+          background:
+            linear-gradient(180deg, rgba(242, 247, 255, 0.78) 0%, rgba(242, 247, 255, 0.88) 65%, #ffffff 100%);
+        }
+      }
+
+      .hero-content {
+        max-width: 680px;
         margin-bottom: 58px;
+      }
+
+      .hero-eyebrow {
+        display: flex;
+        align-items: center;
+        margin-bottom: 24px;
+      }
+
+      .hero-eyebrow-logo {
+        height: 68px;
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+        display: block;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
+      }
+
+      @media (max-width: 600px) {
+        .hero-eyebrow-logo {
+          height: 54px;
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(36px, 5.2vw, 56px);
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 1.18;
+        margin-bottom: 24px;
+        word-break: keep-all;
+      }
+
+      .title-blue {
+        color: #0055ff;
+        display: block;
+      }
+
+      .title-dark {
+        color: #0f172a;
+        display: block;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        color: #334155;
+        line-height: 1.68;
+        margin-bottom: 34px;
+        max-width: 640px;
+        word-break: keep-all;
+      }
+
+      .hero-buttons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
         flex-wrap: wrap;
       }
 
@@ -280,13 +482,16 @@
 
       /* 4-Column Summary Box */
       .summary-box {
-        background-color: #ffffff;
+        background-color: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
         border: 1px solid #e2e8f0;
         border-radius: 18px;
         padding: 26px 30px;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
         transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
 
@@ -697,6 +902,30 @@
         white-space: pre-line;
       }
 
+      .benefit-card-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-top: 2px;
+      }
+
+      .benefit-card-list li {
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.52;
+        position: relative;
+        padding-left: 11px;
+      }
+
+      .benefit-card-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #0055ff;
+        font-weight: 700;
+      }
+
       .learning-support-box {
         background-color: #f3f7ff;
         border: 1px solid #dce8ff;
@@ -763,6 +992,7 @@
       .learning-desc {
         font-size: 14px;
         color: #475569;
+        line-height: 1.55;
       }
 
       .benefits-3grid {
@@ -893,11 +1123,14 @@
         color: #64748b;
       }
 
-      .footer-brand {
-        font-weight: 800;
-        color: #1e293b;
-        margin-bottom: 6px;
-        font-size: 15px;
+      .footer-logo {
+        height: 42px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+        margin-bottom: 10px;
+        mix-blend-mode: multiply;
+        filter: brightness(1.06) contrast(1.06);
       }
 
       .footer-admin-line {
@@ -911,9 +1144,14 @@
     <!-- Top Nav Header -->
     <header class="site-header">
       <div class="container header-wrapper">
-        <a href="#" class="brand">
-          <span class="brand-title">청년취업사관학교</span>
-          <span class="brand-sub">AI+ Academy · KT그룹</span>
+        <a href="#" class="brand" aria-label="청년취업사관학교 AI+ Academy KT그룹 홈">
+          <img
+            src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+            alt="청년취업사관학교 AI+ Academy · KT그룹 로고"
+            class="brand-logo"
+            referrerpolicy="no-referrer"
+          />
+          <span class="brand-text">청년취업사관학교</span>
         </a>
 
         <ul class="nav-menu">
@@ -929,35 +1167,75 @@
       </div>
     </header>
 
+    <!-- 배경 이미지 내부의 텍스트(글자 획)를 지우기 위한 SVG 모폴로지 필터 -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;" aria-hidden="true">
+      <defs>
+        <filter id="erase-bg-text" x="-10%" y="-10%" width="120%" height="120%">
+          <!-- 글자 획(얇은 고대비 픽셀)을 주변 배경색으로 덮어 지움 -->
+          <feMorphology operator="erode" radius="7" in="SourceGraphic" result="eroded" />
+          <feMorphology operator="dilate" radius="7" in="eroded" result="opened" />
+          <feGaussianBlur stdDeviation="14" in="opened" result="smoothed" />
+        </filter>
+        <filter id="soften-bg-text" x="-10%" y="-10%" width="120%" height="120%">
+          <feMorphology operator="erode" radius="5" in="SourceGraphic" result="eroded2" />
+          <feMorphology operator="dilate" radius="5" in="eroded2" result="opened2" />
+          <feGaussianBlur stdDeviation="6" in="opened2" result="smoothed2" />
+        </filter>
+      </defs>
+    </svg>
+
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="container reveal-on-scroll">
-        <!-- Eyebrow -->
-        <div class="hero-eyebrow">
-          <span class="eyebrow-pill">교육비 지원</span>
-          <span class="eyebrow-text">KT그룹 AI+ ACADEMY</span>
-        </div>
+      <!-- 배경 이미지 레이어 (이미지 속 텍스트는 지우고 그래픽 분위기만 연출) -->
+      <div class="hero-bg" aria-hidden="true">
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMzEg/MDAxNzk0NTU0OTQzMjI2.2q2B6ufxKGp5Kfg5zQ-1ICMwHYDt_Wcp67duJJvjCGIg.c9okeuon82nojinjM9Q5ZIiRVvTOTVSf-B0-Do0jXfQg.JPEG/e4a2be038cade.jpg?type=w773"
+          alt=""
+          class="hero-bg-img-clean"
+          referrerpolicy="no-referrer"
+        />
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMzEg/MDAxNzk0NTU0OTQzMjI2.2q2B6ufxKGp5Kfg5zQ-1ICMwHYDt_Wcp67duJJvjCGIg.c9okeuon82nojinjM9Q5ZIiRVvTOTVSf-B0-Do0jXfQg.JPEG/e4a2be038cade.jpg?type=w773"
+          alt=""
+          class="hero-bg-img-graphic"
+          referrerpolicy="no-referrer"
+        />
+        <div class="hero-bg-overlay"></div>
+      </div>
 
-        <!-- Title -->
-        <h1 class="hero-title">
-          <span class="title-blue">[KT그룹] AX전략 기획 및</span>
-          <span class="title-dark">멀티 에이전트 서비스 개발</span>
-        </h1>
+      <div class="container">
+        <div class="hero-content">
+          <!-- Eyebrow Logo -->
+          <div class="hero-eyebrow">
+            <img
+              src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+              alt="KT그룹 × AI+ Academy"
+              class="hero-eyebrow-logo"
+              referrerpolicy="no-referrer"
+            />
+          </div>
 
-        <!-- Subtitle -->
-        <p class="hero-subtitle">
-          이론과 실습을 넘나드는 AX 실전 커리큘럼과<br />
-          종합 프로젝트·맞춤형 취업 컨설팅으로 AX 전문가로 도약하세요.
-        </p>
+          <!-- Title -->
+          <h1 class="hero-title">
+            <span class="title-blue">[KT그룹] AX전략 기획 및</span>
+            <span class="title-dark">멀티 에이전트 서비스 개발</span>
+          </h1>
 
-        <!-- CTA Buttons -->
-        <div class="hero-buttons">
-          <a href="https://naver.me/58qXES4C" target="_blank" rel="noopener noreferrer" class="btn-primary">
-            과정 상담신청 ↗
-          </a>
-          <a href="#curriculum" class="btn-secondary">
-            커리큘럼 살펴보기 ↓
-          </a>
+          <!-- Subtitle -->
+          <p class="hero-subtitle">
+            이론과 실습을 넘나드는 AX 실전 커리큘럼과<br />
+            종합 프로젝트·맞춤형 취업 컨설팅으로 AX 전문가로 도약하세요.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="hero-buttons">
+            <a href="https://naver.me/58qXES4C" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              과정 상담신청 ↗
+            </a>
+            <a href="#curriculum" class="btn-secondary">
+              커리큘럼 살펴보기 ↓
+            </a>
+          </div>
         </div>
 
         <!-- 4 Summary Cards -->
@@ -965,7 +1243,7 @@
           <div class="summary-col">
             <span class="summary-label">교육기간</span>
             <span class="summary-val">2026.12.14 ~ 2027.02.25</span>
-            <span class="summary-desc">총 350시간</span>
+            <span class="summary-desc">방학 활용 10주 단기 집중 교육<br />(총 350시간)</span>
           </div>
 
           <div class="summary-col">
@@ -977,6 +1255,7 @@
           <div class="summary-col">
             <span class="summary-label">선발 인원</span>
             <span class="summary-val">25명 소수 정예</span>
+            <span class="summary-desc">4~5개 조 팀 프로젝트 운영</span>
           </div>
 
           <div class="summary-col">
@@ -1112,7 +1391,7 @@
                 <span class="accordion-num">04</span>
                 <div>
                   <h3 class="accordion-main-title">취업·트렌드 특강</h3>
-                  <p class="accordion-desc-line">최신 실무 사례와 직무별 취업 전략</p>
+                  <p class="accordion-desc-line">AI·AX 현직자 특강 및 직무별 취업특강 진행</p>
                 </div>
               </div>
               <div class="accordion-right">
@@ -1123,7 +1402,7 @@
             <div class="accordion-body" id="curr-4" style="display: none;">
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
-                <span>AI 에이전트 기술 동향·기업 AX 사례</span>
+                <span>AI·AX 현직자 특강: AI 에이전트 기술 동향·기업 AX 사례</span>
               </div>
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
@@ -1131,7 +1410,7 @@
               </div>
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
-                <span>산업별 취업서류·면접·포트폴리오 전략</span>
+                <span>취업특강 진행: 산업별 취업서류·면접·포트폴리오 전략</span>
               </div>
             </div>
           </div>
@@ -1146,7 +1425,7 @@
                     기업 실무 연계 프로젝트
                     <span class="core-pill">핵심 과정</span>
                   </h3>
-                  <p class="accordion-desc-line">프로젝트 전문 강사와 서비스 기획·개발·배포</p>
+                  <p class="accordion-desc-line">현업 경험 보유 코치와 함께 서비스 기획·개발·배포</p>
                 </div>
               </div>
               <div class="accordion-right">
@@ -1157,7 +1436,7 @@
             <div class="accordion-body" id="curr-5" style="display: none;">
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
-                <span>프로젝트 전문 강사 코칭 및 실무 콘텐츠 지원</span>
+                <span>프로젝트 진행 시 현업 경험 보유한 코치 투입 및 실무 콘텐츠 지원</span>
               </div>
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
@@ -1165,7 +1444,7 @@
               </div>
               <div class="accordion-bullet">
                 <span class="bullet-dot"></span>
-                <span>AX 전략 수립부터 웹서비스 통합·배포까지 팀 프로젝트 수행</span>
+                <span>AX 전략 수립부터 웹서비스 통합·배포까지 팀 프로젝트 수행 (4~5개 조 중 우수 프로젝트 선정 시 30만원 상당 시상품 증정)</span>
               </div>
             </div>
           </div>
@@ -1196,85 +1475,116 @@
     <section id="benefits" class="section-benefits">
       <div class="container reveal-on-scroll">
         <h2 class="section-title-blue">교육생 혜택</h2>
-        <p class="section-subtitle-gray">실무 경험부터 취업 준비까지 이어지는 지원 프로그램입니다.</p>
+        <p class="section-subtitle-gray">실무 경험부터 학습 환경, 취업·네트워킹까지 빈틈없이 지원합니다.</p>
 
-        <!-- 01 핵심 교육 혜택 -->
+        <!-- 01 교육 및 프로젝트 핵심 혜택 -->
         <div style="margin-bottom: 56px;">
           <div class="benefit-subhead">
             <span class="subhead-num">01</span>
-            <h3 class="subhead-title">핵심 교육 혜택</h3>
+            <h3 class="subhead-title">교육 및 프로젝트 핵심 혜택</h3>
           </div>
 
           <div class="benefits-4grid">
             <div class="benefit-card hover-scale">
               <span class="benefit-cat-tag">채용 연계</span>
               <h4 class="benefit-card-title">우수 수료생 채용 기회</h4>
-              <p class="benefit-card-text">KT그룹·협력사 연계&#10;채용 기회 제공</p>
+              <ul class="benefit-card-list">
+                <li>KT그룹·협력사 연계 채용 기회 제공</li>
+                <li>미래내일 인턴형 일경험 연계·기업 매칭 지원</li>
+              </ul>
             </div>
 
             <div class="benefit-card hover-scale">
-              <span class="benefit-cat-tag">실무 경험</span>
-              <h4 class="benefit-card-title">AX 실무 프로젝트</h4>
-              <p class="benefit-card-text">AX 과제 수행으로&#10;실무 포트폴리오 완성</p>
+              <span class="benefit-cat-tag">단기 집중 교육</span>
+              <h4 class="benefit-card-title">방학 활용 10주 완성</h4>
+              <ul class="benefit-card-list">
+                <li>방학 기간을 활용한 단기간 집중 교육 (10주)</li>
+                <li>AX 과제 수행으로 실무 포트폴리오 완성</li>
+              </ul>
             </div>
 
             <div class="benefit-card hover-scale">
-              <span class="benefit-cat-tag">인턴형 일경험</span>
-              <h4 class="benefit-card-title">기업 매칭 지원</h4>
-              <p class="benefit-card-text">미래내일 인턴형 일경험 연계·&#10;기업 매칭 지원</p>
+              <span class="benefit-cat-tag">현업 밀착 코칭</span>
+              <h4 class="benefit-card-title">현업 코치 투입 & 특강</h4>
+              <ul class="benefit-card-list">
+                <li>프로젝트 진행 시 현업 경험 보유한 코치 투입</li>
+                <li>AI·AX 현직자 특강 진행</li>
+              </ul>
             </div>
 
             <div class="benefit-card hover-scale">
-              <span class="benefit-cat-tag">산업 기반 학습</span>
-              <h4 class="benefit-card-title">실무 콘텐츠와 코칭</h4>
-              <p class="benefit-card-text">프로젝트 전문 강사와&#10;실무 과제 수행</p>
+              <span class="benefit-cat-tag">우수 프로젝트 시상</span>
+              <h4 class="benefit-card-title">우수팀 시상품 증정</h4>
+              <ul class="benefit-card-list">
+                <li>4~5개 조 중 우수 프로젝트 선정 시 30만원 상당의 시상품 증정</li>
+              </ul>
             </div>
           </div>
 
-          <!-- 학습에 집중할 수 있도록 -->
+          <!-- 학습 환경 및 스터디 지원 -->
           <div class="learning-support-box hover-scale">
-            <h4 class="learning-box-title">학습에 집중할 수 있도록</h4>
+            <h4 class="learning-box-title">학습 환경 및 스터디 지원 · 학습에 집중할 수 있도록</h4>
             <div class="learning-grid">
               <div class="learning-col">
+                <div class="learning-head">교육 기자재·계정 제공</div>
+                <div class="learning-desc">노트북, 듀얼 모니터, Claude Code, OpenAI API, AWS 계정, Teams 계정 등 지원</div>
+              </div>
+              <div class="learning-col">
                 <div class="learning-head">중식 및 간식 제공</div>
-                <div class="learning-desc">교육기간 내 식사·간식 지원</div>
+                <div class="learning-desc">교육기간 내 중식 및 간식 상시 제공</div>
               </div>
               <div class="learning-col">
-                <div class="learning-head">학습 장비·도구 지원</div>
-                <div class="learning-desc">노트북 · Teams 계정 · Claude Code 등</div>
-              </div>
-              <div class="learning-col">
-                <div class="learning-head">현직자 특강</div>
-                <div class="learning-desc">AX 산업 트렌드·실무 인사이트</div>
+                <div class="learning-head">스터디그룹 활동 지원</div>
+                <div class="learning-desc">스터디그룹 활동비 지원 및 그룹장 추가 혜택 제공</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- 02 맞춤형 취업 지원 프로그램 -->
+        <!-- 02 맞춤형 취업 지원 및 네트워킹 -->
         <div>
           <div class="benefit-subhead">
             <span class="subhead-num">02</span>
-            <h3 class="subhead-title">맞춤형 취업 지원 프로그램</h3>
+            <h3 class="subhead-title">맞춤형 취업 지원 및 네트워킹 프로그램</h3>
           </div>
 
-          <div class="benefits-3grid">
+          <div class="benefits-4grid">
             <div class="benefit-card hover-scale">
-              <span class="benefit-cat-tag">자격증·면접</span>
-              <h4 class="benefit-card-title">바우처와 모의면접 지원</h4>
-              <p class="benefit-card-text">자격증 응시 바우처·&#10;실전 모의면접 지원</p>
+              <span class="benefit-cat-tag">자격증·면접·인적성</span>
+              <h4 class="benefit-card-title">바우처 및 인적성 시험</h4>
+              <ul class="benefit-card-list">
+                <li>AICE 자격증 응시 바우처 지급</li>
+                <li>사람인 AI 모의면접 바우처 지급</li>
+                <li>대한상공회의소 주관 인적성 시험 진행</li>
+              </ul>
             </div>
 
             <div class="benefit-card hover-scale">
-              <span class="benefit-cat-tag">1:1 컨설팅</span>
-              <h4 class="benefit-card-title">맞춤형 커리어 멘토링</h4>
-              <p class="benefit-card-text">1:1 이력서·포트폴리오 및&#10;취·창업 컨설팅 지원</p>
+              <span class="benefit-cat-tag">취업 지원</span>
+              <h4 class="benefit-card-title">1:1 취업 컨설팅 & 특강</h4>
+              <ul class="benefit-card-list">
+                <li>실전 취업특강 진행</li>
+                <li>1:1 개별 취업 컨설팅 (포트폴리오 및 자기소개서 첨삭)</li>
+              </ul>
+            </div>
+
+            <div class="benefit-card hover-scale">
+              <span class="benefit-cat-tag">취업 리워드</span>
+              <h4 class="benefit-card-title">취업 축하금 지급</h4>
+              <ul class="benefit-card-list">
+                <li>수료 후 3개월 이내 취업 시 <strong>40만원</strong> 지급</li>
+                <li>수료 후 6개월 이내 취업 시 <strong>20만원</strong> 지급</li>
+              </ul>
             </div>
 
             <div class="benefit-card hover-scale">
               <span class="benefit-cat-tag">네트워킹</span>
-              <h4 class="benefit-card-title">취업캠프 및 박람회 참여 기회</h4>
-              <p class="benefit-card-text">취업행사 참여·&#10;수료생 네트워킹 지원</p>
+              <h4 class="benefit-card-title">교육생·현직자 네트워킹</h4>
+              <ul class="benefit-card-list">
+                <li>교육생 간 네트워킹 프로그램 운영</li>
+                <li>현직자 워크숍 및 네트워킹 운영 (VIPS 식사 제공)</li>
+                <li>취업캠프 및 박람회 참여 기회</li>
+              </ul>
             </div>
           </div>
 
@@ -1441,7 +1751,12 @@
     <!-- Footer -->
     <footer>
       <div class="container">
-        <div class="footer-brand">청년취업사관학교 × KT그룹 AI+ Academy</div>
+        <img
+          src="https://postfiles.pstatic.net/MjAyNjExMTNfMjA1/MDAxNzk0NTUzMjQyNzQz.4G3GgHh9FWgVNdh1RjiSexVGLe6zid4wpTJpZpmYjz0g.EL10BoI5qe6dxUyDasmjoXcruPq5PSfb8UooEphX0Lgg.PNG/Gemini_Generated_Image_ea06epea06epea06.png?type=w773"
+          alt="청년취업사관학교 × KT그룹 AI+ Academy 로고"
+          class="footer-logo"
+          referrerpolicy="no-referrer"
+        />
         <p class="footer-admin-line">홈페이지 운영/담당자: 박형록</p>
         <p>© 청년취업사관학교(SeSAC) & KT Group AI+ Academy. All rights reserved.</p>
       </div>
